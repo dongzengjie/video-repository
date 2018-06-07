@@ -2,10 +2,10 @@ package com.dzj.server.impl;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
-import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,16 +15,23 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dzj.config.ConfigClass;
 import com.dzj.dao.BgmMapper;
 import com.dzj.dao.VideosMapper;
+import com.dzj.dao.VideosMapperCustom;
+import com.dzj.dto.PageResult;
 import com.dzj.enums.UpLoadEnum;
 import com.dzj.enums.VideoEnum;
 import com.dzj.exception.UserException;
+import com.dzj.exception.VideoException;
 import com.dzj.pojo.Bgm;
 import com.dzj.pojo.Videos;
+import com.dzj.pojo.vo.VideoVo;
 import com.dzj.server.VideoService;
 import com.dzj.utils.FetchVideoCover;
+import com.dzj.utils.FileDel;
 import com.dzj.utils.MergeVideoMp3;
 import com.dzj.utils.PathUtil;
 import com.dzj.utils.UploadUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -33,6 +40,8 @@ public class VideoServiceImpl implements VideoService {
 	private VideosMapper videosMapper;
 	@Autowired
 	private BgmMapper bgmMapper;
+	@Autowired
+	private VideosMapperCustom videosMapperCustom;
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean userVideoHandle(MultipartFile file, String userId, Videos videos, String bgmId)
@@ -62,6 +71,7 @@ public class VideoServiceImpl implements VideoService {
 			} catch (IOException e) {
 				throw new UserException("视频处理失败");
 			}
+			//FileDel.delFile(PathUtil.getBasePath()+dbpath);
 			videos.setVideoPath(videoMp4Path);
 			
 		} else {
@@ -76,6 +86,9 @@ public class VideoServiceImpl implements VideoService {
 		} catch (IOException e) {
 			throw new UserException("截图失败");
 		}
+		if (bgmId != null && !StringUtils.isEmpty(bgmId)) {
+			FileDel.delFile(PathUtil.getBasePath()+dbpath);
+		}
 		videos.setCoverPath(coverPath);
 		videos.setUserId(userId);
 		videos.setCreateTime(new Date());
@@ -86,7 +99,24 @@ public class VideoServiceImpl implements VideoService {
 			throw new UserException("视频上传失败");
 		}
 		return true;
+	}
 
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public PageResult getVideosByLimit(Integer page, Integer pageSize)throws VideoException {
+		PageHelper.startPage(page, pageSize);
+		List<VideoVo> videolist= videosMapperCustom.queryAllVideos();
+		
+		if(videolist ==null) {
+			throw new VideoException("视频查询失败~~");
+		}
+		
+		PageInfo<VideoVo> pageInfo = new PageInfo<>(videolist);
+		PageResult pageResult =new PageResult();
+		pageResult.setRows(videolist);
+		pageResult.setPage(page);
+		pageResult.setTotal(pageInfo.getPages());
+		pageResult.setRecords(pageInfo.getTotal());
+		return pageResult;
 	}
 
 }

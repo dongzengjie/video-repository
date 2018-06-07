@@ -3,11 +3,14 @@ package com.dzj.controller;
 import org.apache.commons.lang3.StringUtils;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dzj.config.ConfigClass;
+import com.dzj.dto.PageResult;
 import com.dzj.pojo.Videos;
 import com.dzj.server.VideoService;
 import com.dzj.utils.JSONResult;
@@ -57,6 +60,18 @@ public class VideoController {
 		
 		videoService.userVideoHandle(file, userId, videos,bgmId);
 		return JSONResult.ok();
+		
+	}
+	
+	@ApiImplicitParam(name="page", value="当前页数",required = true,dataType="Integer",paramType="query")
+	@GetMapping(value="/getAllVideo")
+	public JSONResult getAllVideo(Integer page) {
+		if(page == null || page <=0) {
+			page = 1;
+		}
+		PageResult pageResult =videoService.getVideosByLimit(page, ConfigClass.PAGR_SIZE);
+		
+		return JSONResult.ok(pageResult);
 		
 	}
 }
