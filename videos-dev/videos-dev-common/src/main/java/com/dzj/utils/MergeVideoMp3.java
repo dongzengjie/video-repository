@@ -20,16 +20,16 @@ public class MergeVideoMp3 {
 	}
 
 	public void convertor(String videoInputPath, String mp3InputPath, double seconds, String videoOutputPath) throws IOException {
-		
+		//ffmpeg.exe -i bgm.mp3 -i 苏州大裤衩.mp4 -t 7 新的视21频.mp4
 		List<String> command = new ArrayList<>();
 		command.add(ffmpegEXE);
 		command.add("-i");
-		command.add(videoInputPath);
-		command.add("-i");
 		command.add(mp3InputPath);
+		command.add("-i");
+		command.add(videoInputPath);
 		command.add("-t");
 		command.add(String.valueOf(seconds));
-		command.add("-y");
+		//command.add("-y");
 		command.add(videoOutputPath);
 		ProcessBuilder processBuilder =new ProcessBuilder(command);
 		Process process =processBuilder.start();
