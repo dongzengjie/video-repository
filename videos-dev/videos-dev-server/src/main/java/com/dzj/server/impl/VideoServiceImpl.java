@@ -26,6 +26,7 @@ import com.dzj.pojo.Videos;
 import com.dzj.pojo.vo.VideoVo;
 import com.dzj.server.VideoService;
 import com.dzj.utils.FetchVideoCover;
+import com.dzj.utils.FetchVideoGif;
 import com.dzj.utils.FileDel;
 import com.dzj.utils.MergeVideoMp3;
 import com.dzj.utils.PathUtil;
@@ -79,10 +80,13 @@ public class VideoServiceImpl implements VideoService {
 		}
 		
 		//截图
-		String coverPath =  PathUtil.getLocalPath(userId, UpLoadEnum.VIDEO.getMsg())+UUID.randomUUID().toString()+".jpg";
-		FetchVideoCover fetchVideoCover =new FetchVideoCover(ConfigClass.FFMPEG_EXE);
+		//String coverPath =  PathUtil.getLocalPath(userId, UpLoadEnum.VIDEO.getMsg())+UUID.randomUUID().toString()+".jpg";
+		//FetchVideoCover fetchVideoCover =new FetchVideoCover(ConfigClass.FFMPEG_EXE);
+		String coverPath =  PathUtil.getLocalPath(userId, UpLoadEnum.VIDEO.getMsg())+UUID.randomUUID().toString()+".gif";
+		FetchVideoGif fetchVideoGif =new FetchVideoGif(ConfigClass.FFMPEG_EXE);
 		try {
-			fetchVideoCover.getCover(PathUtil.getBasePath()+dbpath, PathUtil.getBasePath()+coverPath);
+			fetchVideoGif.getGIF(PathUtil.getBasePath()+dbpath, videos.getVideoSeconds(),  PathUtil.getBasePath()+coverPath);
+			//fetchVideoCover.getCover(PathUtil.getBasePath()+dbpath, PathUtil.getBasePath()+coverPath);
 		} catch (IOException e) {
 			throw new UserException("截图失败");
 		}

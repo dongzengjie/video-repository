@@ -803,3 +803,122 @@
 2018-06-08 18:06:38.527 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.VideosMapperCustom.queryAllVideos  : ==>  Preparing: select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id where 1=1 and v.status = 1 order by create_time desc LIMIT ? 
 2018-06-08 18:06:38.528 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.VideosMapperCustom.queryAllVideos  : ==> Parameters: 5(Integer)
 2018-06-08 18:06:38.570 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.VideosMapperCustom.queryAllVideos  : <==      Total: 5
+2018-06-08 18:13:36.265 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.V.queryAllVideos_COUNT             : ==>  Preparing: SELECT count(0) FROM videos v LEFT JOIN users u ON v.user_id = u.id WHERE 1 = 1 AND v.status = 1 
+2018-06-08 18:13:36.266 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.V.queryAllVideos_COUNT             : ==> Parameters: 
+2018-06-08 18:13:36.307 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.V.queryAllVideos_COUNT             : <==      Total: 1
+2018-06-08 18:13:36.309 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.VideosMapperCustom.queryAllVideos  : ==>  Preparing: select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id where 1=1 and v.status = 1 order by create_time desc LIMIT ? 
+2018-06-08 18:13:36.310 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.VideosMapperCustom.queryAllVideos  : ==> Parameters: 5(Integer)
+2018-06-08 18:13:36.352 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.VideosMapperCustom.queryAllVideos  : <==      Total: 5
+2018-06-08 18:16:58.725 DEBUG 18232 --- [http-nio-8080-exec-8] c.d.d.V.queryAllVideos_COUNT             : ==>  Preparing: SELECT count(0) FROM videos v LEFT JOIN users u ON v.user_id = u.id WHERE 1 = 1 AND v.status = 1 
+2018-06-08 18:16:58.726 DEBUG 18232 --- [http-nio-8080-exec-8] c.d.d.V.queryAllVideos_COUNT             : ==> Parameters: 
+2018-06-08 18:16:58.767 DEBUG 18232 --- [http-nio-8080-exec-8] c.d.d.V.queryAllVideos_COUNT             : <==      Total: 1
+2018-06-08 18:16:58.768 DEBUG 18232 --- [http-nio-8080-exec-8] c.d.d.VideosMapperCustom.queryAllVideos  : ==>  Preparing: select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id where 1=1 and v.status = 1 order by create_time desc LIMIT ? 
+2018-06-08 18:16:58.769 DEBUG 18232 --- [http-nio-8080-exec-8] c.d.d.VideosMapperCustom.queryAllVideos  : ==> Parameters: 5(Integer)
+2018-06-08 18:16:58.818 DEBUG 18232 --- [http-nio-8080-exec-8] c.d.d.VideosMapperCustom.queryAllVideos  : <==      Total: 5
+2018-06-08 18:17:07.935 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.V.queryAllVideos_COUNT             : ==>  Preparing: SELECT count(0) FROM videos v LEFT JOIN users u ON v.user_id = u.id WHERE 1 = 1 AND v.status = 1 
+2018-06-08 18:17:07.936 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.V.queryAllVideos_COUNT             : ==> Parameters: 
+2018-06-08 18:17:07.977 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.V.queryAllVideos_COUNT             : <==      Total: 1
+2018-06-08 18:17:07.978 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.VideosMapperCustom.queryAllVideos  : ==>  Preparing: select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id where 1=1 and v.status = 1 order by create_time desc LIMIT ?, ? 
+2018-06-08 18:17:07.978 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.VideosMapperCustom.queryAllVideos  : ==> Parameters: 5(Integer), 5(Integer)
+2018-06-08 18:17:08.030 DEBUG 18232 --- [http-nio-8080-exec-4] c.d.d.VideosMapperCustom.queryAllVideos  : <==      Total: 5
+2018-06-08 18:17:11.776 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.V.queryAllVideos_COUNT             : ==>  Preparing: SELECT count(0) FROM videos v LEFT JOIN users u ON v.user_id = u.id WHERE 1 = 1 AND v.status = 1 
+2018-06-08 18:17:11.778 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.V.queryAllVideos_COUNT             : ==> Parameters: 
+2018-06-08 18:17:11.815 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.V.queryAllVideos_COUNT             : <==      Total: 1
+2018-06-08 18:17:11.816 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.VideosMapperCustom.queryAllVideos  : ==>  Preparing: select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id where 1=1 and v.status = 1 order by create_time desc LIMIT ?, ? 
+2018-06-08 18:17:11.817 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.VideosMapperCustom.queryAllVideos  : ==> Parameters: 10(Integer), 5(Integer)
+2018-06-08 18:17:11.864 DEBUG 18232 --- [http-nio-8080-exec-9] c.d.d.VideosMapperCustom.queryAllVideos  : <==      Total: 1
+2018-06-08 18:21:03.651  INFO 18232 --- [RMI TCP Connection(416)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2018-06-08 18:21:03.651  INFO 18232 --- [RMI TCP Connection(416)-127.0.0.1] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@63355449: startup date [Fri Jun 08 11:34:03 CST 2018]; root of context hierarchy
+2018-06-08 18:21:03.691  INFO 18232 --- [RMI TCP Connection(416)-127.0.0.1] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-06-08 18:21:03.692  INFO 18232 --- [RMI TCP Connection(416)-127.0.0.1] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2018-06-08 18:21:03.695  INFO 18232 --- [RMI TCP Connection(416)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-06-08 18:21:03.700  INFO 18232 --- [RMI TCP Connection(416)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-06-08 18:30:58.303  INFO 11816 --- [main] com.dzj.Application                      : Starting Application on DESKTOP-MS8QNBH with PID 11816 (E:\web\STSworkspace\video-repository\videos-dev\videos-dev-api\target\classes started by DZJ in E:\web\STSworkspace\video-repository\videos-dev\videos-dev-api)
+2018-06-08 18:30:58.306 DEBUG 11816 --- [main] com.dzj.Application                      : Running with Spring Boot v2.0.1.RELEASE, Spring v5.0.5.RELEASE
+2018-06-08 18:30:58.307  INFO 11816 --- [main] com.dzj.Application                      : No active profile set, falling back to default profiles: default
+2018-06-08 18:30:58.353  INFO 11816 --- [main] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@c267ef4: startup date [Fri Jun 08 18:30:58 CST 2018]; root of context hierarchy
+2018-06-08 18:30:59.132  INFO 11816 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-06-08 18:30:59.515  INFO 11816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$5ec415f2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-06-08 18:30:59.704 ERROR 11816 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2018-06-08 18:30:59.783  INFO 11816 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2018-06-08 18:30:59.794 ERROR 11816 --- [main] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2018-06-08 18:30:59.804  INFO 11816 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-06-08 18:30:59.805  INFO 11816 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.29
+2018-06-08 18:30:59.808 ERROR 11816 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2018-06-08 18:30:59.907  INFO 11816 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-06-08 18:30:59.907  INFO 11816 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1554 ms
+2018-06-08 18:31:00.033  INFO 11816 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2018-06-08 18:31:00.039  INFO 11816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-06-08 18:31:00.040  INFO 11816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-06-08 18:31:00.040  INFO 11816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-06-08 18:31:00.040  INFO 11816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-06-08 18:31:01.041  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/bgm/bgmlist],methods=[GET]}" onto public com.dzj.utils.JSONResult com.dzj.controller.BgmController.getBgmList()
+2018-06-08 18:31:01.046  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/userFaceImage],methods=[POST],consumes=[multipart/form-data]}" onto public com.dzj.utils.JSONResult com.dzj.controller.UserController.userFaceImage(java.lang.String,org.springframework.web.multipart.MultipartFile)
+2018-06-08 18:31:01.047  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/register],methods=[POST]}" onto public com.dzj.utils.JSONResult com.dzj.controller.UserRegisterOrLogin.register(com.dzj.pojo.Users) throws java.lang.Exception
+2018-06-08 18:31:01.048  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/login],methods=[POST]}" onto public com.dzj.utils.JSONResult com.dzj.controller.UserRegisterOrLogin.login(com.dzj.pojo.Users) throws java.lang.Exception
+2018-06-08 18:31:01.048  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/loginout],methods=[POST]}" onto public com.dzj.utils.JSONResult com.dzj.controller.UserRegisterOrLogin.loginout(com.dzj.pojo.Users)
+2018-06-08 18:31:01.049  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/video/getAllVideo],methods=[GET]}" onto public com.dzj.utils.JSONResult com.dzj.controller.VideoController.getAllVideo(java.lang.Integer)
+2018-06-08 18:31:01.049  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/video/videoUpLoad],methods=[POST],consumes=[multipart/form-data]}" onto public com.dzj.utils.JSONResult com.dzj.controller.VideoController.videoUpLoad(java.lang.String,java.lang.String,double,int,int,java.lang.String,org.springframework.web.multipart.MultipartFile)
+2018-06-08 18:31:01.050  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/v2/api-docs],methods=[GET],produces=[application/json || application/hal+json]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)
+2018-06-08 18:31:01.052  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/configuration/ui]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-06-08 18:31:01.053  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources]}" onto org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-06-08 18:31:01.054  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/configuration/security]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-06-08 18:31:01.056  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-06-08 18:31:01.056  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-06-08 18:31:01.386  INFO 11816 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-06-08 18:31:01.466  INFO 11816 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@c267ef4: startup date [Fri Jun 08 18:30:58 CST 2018]; root of context hierarchy
+2018-06-08 18:31:01.513  INFO 11816 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-06-08 18:31:01.513  INFO 11816 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-06-08 18:31:01.514  INFO 11816 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/upload/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-06-08 18:31:01.528  INFO 11816 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in globalExceptionHandler
+2018-06-08 18:31:01.565  WARN 11816 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2018-06-08 18:31:02.200  INFO 11816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-06-08 18:31:02.202  INFO 11816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-06-08 18:31:02.207  INFO 11816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-06-08 18:31:02.216  INFO 11816 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2018-06-08 18:31:02.230  INFO 11816 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2018-06-08 18:31:02.239  INFO 11816 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2018-06-08 18:31:02.341  WARN 11816 --- [main] d.s.r.o.OperationImplicitParameterReader : Coercing to be of type string. This may not even be a scalar type in actuality
+2018-06-08 18:31:02.358  WARN 11816 --- [main] d.s.r.o.OperationImplicitParameterReader : Coercing to be of type string. This may not even be a scalar type in actuality
+2018-06-08 18:31:02.361  WARN 11816 --- [main] d.s.r.o.OperationImplicitParameterReader : Coercing to be of type string. This may not even be a scalar type in actuality
+2018-06-08 18:31:02.361  WARN 11816 --- [main] d.s.r.o.OperationImplicitParameterReader : Coercing to be of type string. This may not even be a scalar type in actuality
+2018-06-08 18:31:02.361  WARN 11816 --- [main] d.s.r.o.OperationImplicitParameterReader : Coercing to be of type string. This may not even be a scalar type in actuality
+2018-06-08 18:31:02.361  WARN 11816 --- [main] d.s.r.o.OperationImplicitParameterReader : Coercing to be of type string. This may not even be a scalar type in actuality
+2018-06-08 18:31:02.361  WARN 11816 --- [main] d.s.r.o.OperationImplicitParameterReader : Coercing to be of type string. This may not even be a scalar type in actuality
+2018-06-08 18:31:02.361  WARN 11816 --- [main] d.s.r.o.OperationImplicitParameterReader : Coercing to be of type string. This may not even be a scalar type in actuality
+2018-06-08 18:31:02.399  INFO 11816 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2018-06-08 18:31:02.403  INFO 11816 --- [main] com.dzj.Application                      : Started Application in 4.385 seconds (JVM running for 4.934)
+2018-06-08 18:31:26.265 ERROR 11816 --- [http-nio-8080-exec-7] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2018-06-08 18:31:26.332  INFO 11816 --- [http-nio-8080-exec-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-06-08 18:31:26.332  INFO 11816 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2018-06-08 18:31:26.357  INFO 11816 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 25 ms
+2018-06-08 18:32:59.359 ERROR 11816 --- [http-nio-8080-exec-8] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2018-06-08 18:32:59.445  INFO 11816 --- [http-nio-8080-exec-8] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-06-08 18:33:00.318  INFO 11816 --- [http-nio-8080-exec-8] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-06-08 18:33:00.470 DEBUG 11816 --- [http-nio-8080-exec-8] c.d.dao.UsersMapper.selectOneByExample   : ==>  Preparing: SELECT id,username,password,face_image,nickname,fans_counts,follow_counts,receive_like_counts FROM users WHERE ( username = ? and password = ? ) 
+2018-06-08 18:33:00.485 DEBUG 11816 --- [http-nio-8080-exec-8] c.d.dao.UsersMapper.selectOneByExample   : ==> Parameters: dzj(String), 4QrcOUm6Wau+VuBX8g+IPg==(String)
+2018-06-08 18:33:00.555 DEBUG 11816 --- [http-nio-8080-exec-8] c.d.dao.UsersMapper.selectOneByExample   : <==      Total: 1
+2018-06-08 18:33:20.091 DEBUG 11816 --- [http-nio-8080-exec-9] com.dzj.dao.BgmMapper.selectAll          : ==>  Preparing: SELECT id,author,name,path FROM bgm 
+2018-06-08 18:33:20.093 DEBUG 11816 --- [http-nio-8080-exec-9] com.dzj.dao.BgmMapper.selectAll          : ==> Parameters: 
+2018-06-08 18:33:20.138 DEBUG 11816 --- [http-nio-8080-exec-9] com.dzj.dao.BgmMapper.selectAll          : <==      Total: 11
+2018-06-08 18:33:21.568 ERROR 11816 --- [http-nio-8080-exec-1] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2018-06-08 18:33:21.811 ERROR 11816 --- [http-nio-8080-exec-2] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2018-06-08 18:33:22.323 ERROR 11816 --- [http-nio-8080-exec-1] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2018-06-08 18:33:39.864 DEBUG 11816 --- [http-nio-8080-exec-6] c.dzj.dao.BgmMapper.selectByPrimaryKey   : ==>  Preparing: SELECT id,author,name,path FROM bgm WHERE id = ? 
+2018-06-08 18:33:39.865 DEBUG 11816 --- [http-nio-8080-exec-6] c.dzj.dao.BgmMapper.selectByPrimaryKey   : ==> Parameters: 1004(String)
+2018-06-08 18:33:39.907 DEBUG 11816 --- [http-nio-8080-exec-6] c.dzj.dao.BgmMapper.selectByPrimaryKey   : <==      Total: 1
+2018-06-08 18:33:40.506 DEBUG 11816 --- [http-nio-8080-exec-6] c.dzj.dao.VideosMapper.insertSelective   : ==>  Preparing: INSERT INTO videos ( id,user_id,audio_id,video_desc,video_path,video_seconds,video_width,video_height,cover_path,status,create_time ) VALUES( ?,?,?,?,?,?,?,?,?,?,? ) 
+2018-06-08 18:33:40.507 DEBUG 11816 --- [http-nio-8080-exec-6] c.dzj.dao.VideosMapper.insertSelective   : ==> Parameters: 180608140131107340288(String), 18053088Y40XB7R4(String), 1004(String), 你发(String), /upload/18053088Y40XB7R4/video/c03f5110-aeb4-4668-bed8-8a2f47ee8c90.mp4(String), 5.0(Float), 272(Integer), 480(Integer), /upload/18053088Y40XB7R4/video/11b2f4e9-4477-4b9e-adbd-90b29804878e.gif(String), 1(Integer), 2018-06-08 18:33:40.504(Timestamp)
+2018-06-08 18:33:40.601 DEBUG 11816 --- [http-nio-8080-exec-6] c.dzj.dao.VideosMapper.insertSelective   : <==    Updates: 1
+2018-06-08 18:34:06.503 DEBUG 11816 --- [http-nio-8080-exec-7] c.d.d.V.queryAllVideos_COUNT             : ==>  Preparing: SELECT count(0) FROM videos v LEFT JOIN users u ON v.user_id = u.id WHERE 1 = 1 AND v.status = 1 
+2018-06-08 18:34:06.505 DEBUG 11816 --- [http-nio-8080-exec-7] c.d.d.V.queryAllVideos_COUNT             : ==> Parameters: 
+2018-06-08 18:34:06.552 DEBUG 11816 --- [http-nio-8080-exec-7] c.d.d.V.queryAllVideos_COUNT             : <==      Total: 1
+2018-06-08 18:34:06.556 DEBUG 11816 --- [http-nio-8080-exec-7] c.d.d.VideosMapperCustom.queryAllVideos  : ==>  Preparing: select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id where 1=1 and v.status = 1 order by create_time desc LIMIT ? 
+2018-06-08 18:34:06.558 DEBUG 11816 --- [http-nio-8080-exec-7] c.d.d.VideosMapperCustom.queryAllVideos  : ==> Parameters: 5(Integer)
+2018-06-08 18:34:06.607 DEBUG 11816 --- [http-nio-8080-exec-7] c.d.d.VideosMapperCustom.queryAllVideos  : <==      Total: 5
+2018-06-08 18:34:26.561 DEBUG 11816 --- [http-nio-8080-exec-1] c.d.d.V.queryAllVideos_COUNT             : ==>  Preparing: SELECT count(0) FROM videos v LEFT JOIN users u ON v.user_id = u.id WHERE 1 = 1 AND v.status = 1 
+2018-06-08 18:34:26.562 DEBUG 11816 --- [http-nio-8080-exec-1] c.d.d.V.queryAllVideos_COUNT             : ==> Parameters: 
+2018-06-08 18:34:26.604 DEBUG 11816 --- [http-nio-8080-exec-1] c.d.d.V.queryAllVideos_COUNT             : <==      Total: 1
+2018-06-08 18:34:26.607 DEBUG 11816 --- [http-nio-8080-exec-1] c.d.d.VideosMapperCustom.queryAllVideos  : ==>  Preparing: select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id where 1=1 and v.status = 1 order by create_time desc LIMIT ? 
+2018-06-08 18:34:26.608 DEBUG 11816 --- [http-nio-8080-exec-1] c.d.d.VideosMapperCustom.queryAllVideos  : ==> Parameters: 5(Integer)
+2018-06-08 18:34:26.658 DEBUG 11816 --- [http-nio-8080-exec-1] c.d.d.VideosMapperCustom.queryAllVideos  : <==      Total: 5
