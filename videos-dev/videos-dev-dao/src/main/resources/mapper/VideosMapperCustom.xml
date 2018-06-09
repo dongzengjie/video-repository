@@ -17,8 +17,14 @@
      <result column="nickname" property="nickname" jdbcType="VARCHAR" />
       <result column="face_image" property="faceImage" jdbcType="VARCHAR" />
   </resultMap>
-  <select id="queryAllVideos" resultMap="BaseResultMap">
+  <select id="queryAllVideos" resultType="com.dzj.pojo.vo.VideoVo">
 	select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id 
-  	where 1=1 and v.status = 1 order by create_time desc
+  	where 1=1 and v.status = 1 
+  
+  	<if test=" videos != null and videos.videoDesc !=null and videos.videoDesc !='' " >
+  			and v.video_desc like '%${videos.videoDesc}%'
+  	</if>
+  	
+  	 order by create_time desc
   </select>
 </mapper>

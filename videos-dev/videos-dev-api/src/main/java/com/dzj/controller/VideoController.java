@@ -5,6 +5,7 @@ import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -62,14 +63,24 @@ public class VideoController {
 		return JSONResult.ok();
 		
 	}
-	
-	@ApiImplicitParam(name="page", value="当前页数",required = true,dataType="Integer",paramType="query")
-	@GetMapping(value="/getAllVideo")
-	public JSONResult getAllVideo(Integer page) {
+	/**
+	 * 
+	 * @param videos
+	 * @param isSaveHot 1 保存热搜词  0 不保存
+	 * @param page
+	 * @return
+	 */
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="page", value="当前页数",required = true,dataType="Integer",paramType="query"),
+		@ApiImplicitParam(name="isSaveHot", value="是否保存热搜词语",required = true,dataType="Integer",paramType="query")
+	})
+	@PostMapping(value="/getAllVideo")
+	public JSONResult getAllVideo(@RequestBody Videos videos,Integer isSaveHot, Integer page) {
 		if(page == null || page <=0) {
 			page = 1;
 		}
-		PageResult pageResult =videoService.getVideosByLimit(page, ConfigClass.PAGR_SIZE);
+	
+		PageResult pageResult =videoService.getVideosByLimit(videos,isSaveHot,page, ConfigClass.PAGR_SIZE);
 		
 		return JSONResult.ok(pageResult);
 		

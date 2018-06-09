@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
+import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dzj.config.ConfigClass;
 import com.dzj.dao.BgmMapper;
+import com.dzj.dao.SearchRecordsMapper;
 import com.dzj.dao.VideosMapper;
 import com.dzj.dao.VideosMapperCustom;
 import com.dzj.dto.PageResult;
@@ -22,6 +24,7 @@ import com.dzj.enums.VideoEnum;
 import com.dzj.exception.UserException;
 import com.dzj.exception.VideoException;
 import com.dzj.pojo.Bgm;
+import com.dzj.pojo.SearchRecords;
 import com.dzj.pojo.Videos;
 import com.dzj.pojo.vo.VideoVo;
 import com.dzj.server.VideoService;
@@ -43,6 +46,8 @@ public class VideoServiceImpl implements VideoService {
 	private BgmMapper bgmMapper;
 	@Autowired
 	private VideosMapperCustom videosMapperCustom;
+	@Autowired
+	private SearchRecordsMapper searchRecordsMapper;
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean userVideoHandle(MultipartFile file, String userId, Videos videos, String bgmId)
@@ -105,10 +110,23 @@ public class VideoServiceImpl implements VideoService {
 		return true;
 	}
 
-	@Transactional(propagation = Propagation.SUPPORTS)
-	public PageResult getVideosByLimit(Integer page, Integer pageSize)throws VideoException {
+	@Transactional(propagation = Propagation.REQUIRED)
+	public PageResult getVideosByLimit(Videos videos,Integer isSaveHot,Integer page, Integer pageSize)throws VideoException {
+		if(isSaveHot !=null && isSaveHot ==1 && videos.getVideoDesc() !=null && videos.getVideoDesc() !="") {
+			SearchRecords record =new SearchRecords();
+			record.setId(Sid.next());
+			record.setContent(videos.getVideoDesc());
+			searchRecordsMapper.insert(record);
+		}
+		
 		PageHelper.startPage(page, pageSize);
-		List<VideoVo> videolist= videosMapperCustom.queryAllVideos();
+		List<VideoVo> videolist=null;
+		try {
+			videolist = videosMapperCustom.queryAllVideos(videos);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		
 		if(videolist ==null) {
 			throw new VideoException("视频查询失败~~");

@@ -12,6 +12,8 @@ public class Videos {
      */
     @Column(name = "user_id")
     private String userId;
+    
+    
 
     /**
      * 用户使用音频的信息

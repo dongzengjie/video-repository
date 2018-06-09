@@ -25,5 +25,5 @@ public interface VideoService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult getVideosByLimit(Integer page,Integer pageSize) throws VideoException;
+	public PageResult getVideosByLimit(Videos videos,Integer isSaveHot,Integer page,Integer pageSize) throws VideoException;
 }
