@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dzj.config.ConfigClass;
 import com.dzj.dao.BgmMapper;
 import com.dzj.dao.SearchRecordsMapper;
+import com.dzj.dao.UsersLikeVideosMapper;
+import com.dzj.dao.UsersMapper;
 import com.dzj.dao.VideosMapper;
 import com.dzj.dao.VideosMapperCustom;
 import com.dzj.dto.PageResult;
@@ -25,6 +27,7 @@ import com.dzj.exception.UserException;
 import com.dzj.exception.VideoException;
 import com.dzj.pojo.Bgm;
 import com.dzj.pojo.SearchRecords;
+import com.dzj.pojo.UsersLikeVideos;
 import com.dzj.pojo.Videos;
 import com.dzj.pojo.vo.VideoVo;
 import com.dzj.server.VideoService;
@@ -37,6 +40,9 @@ import com.dzj.utils.UploadUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
+
 @Service
 public class VideoServiceImpl implements VideoService {
 
@@ -48,6 +54,10 @@ public class VideoServiceImpl implements VideoService {
 	private VideosMapperCustom videosMapperCustom;
 	@Autowired
 	private SearchRecordsMapper searchRecordsMapper;
+	@Autowired
+	private UsersLikeVideosMapper usersLikeVideosMapper;
+	@Autowired
+	private UsersMapper usersMapper;
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean userVideoHandle(MultipartFile file, String userId, Videos videos, String bgmId)
@@ -139,6 +149,48 @@ public class VideoServiceImpl implements VideoService {
 		pageResult.setTotal(pageInfo.getPages());
 		pageResult.setRecords(pageInfo.getTotal());
 		return pageResult;
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void userLikeVideo(String userId, String videoCreateUserId, String videoId) {
+
+		videosMapperCustom.addLikeCounts(videoId);
+		usersMapper.addReceiveLikeCounts(videoCreateUserId);
+		UsersLikeVideos usersLikeVideos =new UsersLikeVideos();
+		usersLikeVideos.setId(Sid.next());
+		usersLikeVideos.setUserId(userId);
+		usersLikeVideos.setVideoId(videoId);
+		usersLikeVideosMapper.insert(usersLikeVideos);
+		
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void userUnLikeVideo(String userId, String videoCreateUserId, String videoId) {
+
+		videosMapperCustom.reduceLikeCounts(videoId);
+		usersMapper.reduceReceiveLikeCounts(videoCreateUserId);
+		
+		Example example =new Example(UsersLikeVideos.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("userId", userId);
+		criteria.andEqualTo("videoId", videoId);
+		usersLikeVideosMapper.deleteByExample(example);
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public boolean isLikeVideo(String userId, String videoId) {
+		if(userId == null || videoId == null) {
+			return false;
+		}
+		Example example =new Example(UsersLikeVideos.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("userId", userId);
+		criteria.andEqualTo("videoId", videoId);
+		List<UsersLikeVideos> likeVideosList = usersLikeVideosMapper.selectByExample(example);
+		if(likeVideosList == null || likeVideosList.size() <= 0) {
+			return false;
+		}
+		return true;
 	}
 
 }

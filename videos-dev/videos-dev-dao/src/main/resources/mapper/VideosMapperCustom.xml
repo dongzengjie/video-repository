@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dzj.dao.VideosMapperCustom" >
-  <resultMap id="BaseResultMap" type="com.dzj.pojo.vo.VideoVo" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="VARCHAR" />
-    <result column="audio_id" property="audioId" jdbcType="VARCHAR" />
-    <result column="video_desc" property="videoDesc" jdbcType="VARCHAR" />
-    <result column="video_path" property="videoPath" jdbcType="VARCHAR" />
-    <result column="video_seconds" property="videoSeconds" jdbcType="REAL" />
-    <result column="video_width" property="videoWidth" jdbcType="INTEGER" />
-    <result column="video_height" property="videoHeight" jdbcType="INTEGER" />
-    <result column="cover_path" property="coverPath" jdbcType="VARCHAR" />
-    <result column="like_counts" property="likeCounts" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
-      <result column="face_image" property="faceImage" jdbcType="VARCHAR" />
-  </resultMap>
-  <select id="queryAllVideos" resultType="com.dzj.pojo.vo.VideoVo">
-	select v.* ,u.nickname , u.face_image from videos v left join users u on v.user_id = u.id 
-  	where 1=1 and v.status = 1 
-  
-  	<if test=" videos != null and videos.videoDesc !=null and videos.videoDesc !='' " >
-  			and v.video_desc like '%${videos.videoDesc}%'
-  	</if>
-  	
-  	 order by create_time desc
-  </select>
+<mapper namespace="com.dzj.dao.VideosMapperCustom">
+	<resultMap id="BaseResultMap" type="com.dzj.pojo.vo.VideoVo">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="audio_id" property="audioId" jdbcType="VARCHAR" />
+		<result column="video_desc" property="videoDesc"
+			jdbcType="VARCHAR" />
+		<result column="video_path" property="videoPath"
+			jdbcType="VARCHAR" />
+		<result column="video_seconds" property="videoSeconds"
+			jdbcType="REAL" />
+		<result column="video_width" property="videoWidth"
+			jdbcType="INTEGER" />
+		<result column="video_height" property="videoHeight"
+			jdbcType="INTEGER" />
+		<result column="cover_path" property="coverPath"
+			jdbcType="VARCHAR" />
+		<result column="like_counts" property="likeCounts"
+			jdbcType="BIGINT" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime"
+			jdbcType="TIMESTAMP" />
+		<result column="nickname" property="nickname"
+			jdbcType="VARCHAR" />
+		<result column="face_image" property="faceImage"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="queryAllVideos" resultType="com.dzj.pojo.vo.VideoVo">
+		select v.* ,u.nickname , u.face_image from videos v left join users u
+		on v.user_id = u.id
+		where 1=1 and v.status = 1
+
+		<if
+			test=" videos != null and videos.videoDesc !=null and videos.videoDesc !='' ">
+			and v.video_desc like '%${videos.videoDesc}%'
+		</if>
+
+		order by create_time desc
+	</select>
+
+
+	<update id="addLikeCounts" parameterType="java.lang.String">
+		update videos set like_counts=like_counts+1 where id = #{videoId}
+	</update>
+
+	<update id="reduceLikeCounts" parameterType="java.lang.String">
+		update videos set like_counts=like_counts-1 where id = #{videoId}
+	</update>
 </mapper>

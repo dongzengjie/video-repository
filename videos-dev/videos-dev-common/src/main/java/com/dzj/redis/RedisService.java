@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.dzj.redis.key.KeyPrefix;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -24,11 +26,12 @@ public class RedisService {
 	 * @param clazz
 	 * @return
 	 */
-	public <T> T get(String key, Class<T> clazz) {
+	public <T> T get(KeyPrefix keyPrefix,String key, Class<T> clazz) {
 		Jedis jedis = null;
+		String realKey = keyPrefix.getKey() + key;
 		try {
 			jedis = jedisPool.getResource();
-			String str = jedis.get(key);
+			String str = jedis.get(realKey);
 
 			T t = stringToBean(str, clazz);
 			return t;
@@ -98,12 +101,12 @@ public class RedisService {
 	 * @param key
 	 * @return
 	 */
-	public <T> Long del(String key) {
+	public <T> Long del(KeyPrefix keyPrefix, String key) {
 		Jedis jedis = null;
 		try {
 			jedis = jedisPool.getResource();
 			
-			return jedis.del(key);
+			return jedis.del(keyPrefix.getKey()+key);
 		} finally {
 			returnToPool(jedis);
 		}
@@ -117,15 +120,21 @@ public class RedisService {
 	 * @param value
 	 * @return
 	 */
-	public <T> boolean set(String key, T value) {
+	public <T> boolean set(KeyPrefix keyPrefix,String key , T value) {
 		Jedis jedis = null;
+		String realKey = keyPrefix.getKey() + key;
 		try {
 			jedis = jedisPool.getResource();
 			String str = beanToString(value);
 			if (str == null || str.length() <= 0) {
 				return false;
 			}
-			jedis.set(key, str);
+			if(keyPrefix.expireSeconds() <=0) {
+				jedis.set(realKey, str);
+			}else {
+				jedis.setex(realKey, keyPrefix.expireSeconds(), str);
+			}
+			
 			return true;
 		} finally {
 			returnToPool(jedis);
@@ -140,25 +149,26 @@ public class RedisService {
 	 * @param value
 	 * @return
 	 */
-	public <T> boolean setValueAndOverTime(String key, T value, int timeOut) {
+	/*public <T> boolean setValueAndOverTime(KeyPrefix keyPrefix,String key , T value) {
 		Jedis jedis = null;
+		String realKey = keyPrefix + key;
 		try {
 			jedis = jedisPool.getResource();
 			String str = beanToString(value);
 			if (str == null || str.length() <= 0) {
 				return false;
 			}
-			if (timeOut <= 0) {
-				jedis.set(key, str);
+			if (keyPrefix.expireSeconds() <= 0) {
+				jedis.set(keyPrefix.getKey(), str);
 			}
-			jedis.setex(key, timeOut, str);
+			jedis.setex(realKey, timeOut, str);
 			return true;
 		} finally {
 			returnToPool(jedis);
 		}
 
 	}
-
+*/
 	private static <T> T stringToBean(String str, Class<T> clazz) {
 
 		if (str == null || str.length() <= 0 || clazz == null) {

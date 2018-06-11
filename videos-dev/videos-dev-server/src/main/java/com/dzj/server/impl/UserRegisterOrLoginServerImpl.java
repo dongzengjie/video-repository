@@ -15,6 +15,7 @@ import com.dzj.dao.UsersMapper;
 import com.dzj.pojo.Users;
 import com.dzj.pojo.vo.UsersVo;
 import com.dzj.redis.RedisService;
+import com.dzj.redis.key.UserKey;
 import com.dzj.server.UserRegisterOrLoginServer;
 
 import tk.mybatis.mapper.entity.Example;
@@ -28,9 +29,9 @@ public class UserRegisterOrLoginServerImpl implements UserRegisterOrLoginServer 
 	@Autowired
 	private RedisService redisService;
 	
-	private static final String USER_REDIS="USER-REGISTER-ORLOGIN-SERVER-IMPL";
 	
-	private static final int TIMES = 60 * 60 * 3;//3小时
+	
+	
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public boolean queryUserIsExist(String username) {
 		Users user =new Users();
@@ -47,7 +48,7 @@ public class UserRegisterOrLoginServerImpl implements UserRegisterOrLoginServer 
 		user.setId(id);
 		int result = usersMapper.insert(user);
 		if(result >0) {
-			usersVo = setUserRedisSessionToken(user, TIMES);
+			usersVo = setUserRedisSessionToken(user);
 		}
 		return usersVo;
 	}
@@ -62,7 +63,7 @@ public class UserRegisterOrLoginServerImpl implements UserRegisterOrLoginServer 
 		criteria.andEqualTo("password",password);
 		Users users = usersMapper.selectOneByExample(example);
 		if(users !=null) {
-			usersVo = setUserRedisSessionToken(users,TIMES);//1000*60*30
+			usersVo =  setUserRedisSessionToken(users);
 		}
 		return usersVo;
 		
@@ -75,11 +76,12 @@ public class UserRegisterOrLoginServerImpl implements UserRegisterOrLoginServer 
 	 * @param timeOut
 	 * @return
 	 */
-	private UsersVo setUserRedisSessionToken(Users user,int timeOut) {
-		String key = USER_REDIS +":"+user.getId();
+	private UsersVo setUserRedisSessionToken(Users user) {
+	
 		Date date =new Date();
+	
 		String token = UUID.randomUUID().toString()+date.getTime();
-		redisService.setValueAndOverTime(key, token, timeOut);
+		redisService.set(UserKey.token, user.getId(), token);
 		UsersVo usersVo =new UsersVo();
 		BeanUtils.copyProperties(user, usersVo);
 		usersVo.setToken(token);
@@ -89,8 +91,8 @@ public class UserRegisterOrLoginServerImpl implements UserRegisterOrLoginServer 
 	
 	
 	public boolean loginout(String userId) {
-		String key = USER_REDIS+":"+userId;
-		long result = redisService.del(key);
+		
+		long result = redisService.del(UserKey.token, userId);
 		if(result<=0) {
 			return false;
 		}

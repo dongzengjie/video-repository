@@ -70,6 +70,7 @@ public class VideoController {
 	 * @param page
 	 * @return
 	 */
+	@ApiOperation(value="获取视频接口", notes="")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="page", value="当前页数",required = true,dataType="Integer",paramType="query"),
 		@ApiImplicitParam(name="isSaveHot", value="是否保存热搜词语",required = true,dataType="Integer",paramType="query")
@@ -85,4 +86,34 @@ public class VideoController {
 		return JSONResult.ok(pageResult);
 		
 	}
+	
+	@ApiOperation(value="用户点赞接口", notes="")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="userId", value="用户id",required = true,dataType="Integer",paramType="query"),
+		@ApiImplicitParam(name="videoCreateId", value="视频创造者id",required = true,dataType="Integer",paramType="query"),
+		@ApiImplicitParam(name="videoId", value="视频id",required = true,dataType="Integer",paramType="query")
+	})
+	@PostMapping(value="/userLike")
+	public JSONResult userLike(String userId,String videoCreateId,String videoId) {
+		
+		videoService.userLikeVideo(userId, videoCreateId, videoId);
+		
+		return JSONResult.ok();
+		
+	}
+	
+	@ApiOperation(value="用户取消点赞接口", notes="")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="userId", value="用户id",required = true,dataType="Integer",paramType="query"),
+		@ApiImplicitParam(name="videoCreateId", value="视频创造者id",required = true,dataType="Integer",paramType="query"),
+		@ApiImplicitParam(name="videoId", value="视频id",required = true,dataType="Integer",paramType="query")
+	})
+	@PostMapping(value="/userUnLike")
+	public JSONResult userUnLike(String userId,String videoCreateId,String videoId) {
+		videoService.userUnLikeVideo(userId, videoCreateId, videoId);
+		return JSONResult.ok();
+		
+	}
+	
+	
 }
