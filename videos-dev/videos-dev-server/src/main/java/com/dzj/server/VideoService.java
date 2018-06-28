@@ -41,4 +41,13 @@ public interface VideoService {
 	 * @return
 	 */
 	public PageResult getVideosByLimit(Videos videos,Integer isSaveHot,Integer page,Integer pageSize) throws VideoException;
+	
+	/**
+	 * 分页查询用户收藏的视频
+	 * @param userId
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public PageResult getUserLikeVideoByLimit(String userId ,Integer page,Integer pageSize) throws VideoException;
 }

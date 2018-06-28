@@ -28,7 +28,7 @@ public class MiniInterceptor implements HandlerInterceptor {
 		if (StringUtils.isNotBlank(userId) && StringUtils.isNotBlank(userId)) {
 			String uniqueToken = redisService.get(UserKey.token, userId, String.class);
 			if(StringUtils.isEmpty(uniqueToken) || StringUtils.isBlank(uniqueToken)) {
-				returnErrorResponse(response,JSONResult.errorTokenMsg("请登录"));
+				returnErrorResponse(response,JSONResult.errorTokenMsg("登陆过期"));
 				return false;
 			}else {
 				if(!uniqueToken.equals(userToken)) {

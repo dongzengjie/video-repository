@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dzj.dao.CommentsMapper" >
-  <resultMap id="BaseResultMap" type="com.dzj.pojo.Comments" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="video_id" property="videoId" jdbcType="VARCHAR" />
-    <result column="from_user_id" property="fromUserId" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
-  </resultMap>
+<mapper namespace="com.dzj.dao.CommentsMapper">
+	<resultMap id="BaseResultMap" type="com.dzj.pojo.Comments">
+		<!-- WARNING - @mbg.generated -->
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="video_id" property="videoId" jdbcType="VARCHAR" />
+		<result column="from_user_id" property="fromUserId"
+			jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime"
+			jdbcType="TIMESTAMP" />
+		<result column="to_user_id" property="toUserId"
+			jdbcType="VARCHAR" />
+		<result column="father_comment_id" property="fatherCommentId"
+			jdbcType="VARCHAR" />
+		<result column="comment" property="comment"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<insert id="insertComment" parameterType="com.dzj.pojo.Comments">
+		INSERT INTO comments (
+		id,video_id,from_user_id,create_time,to_user_id,father_comment_id,comment
+		) VALUES(
+		#{id},#{videoId},#{fromUserId},#{createTime},#{toUserId},#{fatherCommentId},#{comment}
+		)
+	</insert>
+
+
+	<select id="queryComment" resultType="com.dzj.pojo.vo.CommentVo">
+		select c.* ,u.nickname AS nickname,u.face_image AS faceImage,tu.nickname as
+		toNickname from comments c left join users u on from_user_id = u.id
+		left join users tu on to_user_id = tu.id
+		where video_id=#{videoId}
+	</select>
 </mapper>

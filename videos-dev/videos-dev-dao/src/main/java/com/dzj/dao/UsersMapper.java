@@ -1,6 +1,9 @@
 package com.dzj.dao;
 
+import java.util.List;
+
 import com.dzj.pojo.Users;
+import com.dzj.pojo.vo.UsersVo;
 import com.dzj.utils.MyMapper;
 
 public interface UsersMapper extends MyMapper<Users> {
@@ -41,4 +44,11 @@ public interface UsersMapper extends MyMapper<Users> {
 	 * @param userId
 	 */
 	public void reduceFollowCounts(String userId);
+	
+	/**
+	 * 查询用户的关注
+	 * @param fansId
+	 * @return
+	 */
+	List<Users> queryUserFollow(String fansId); 
 }

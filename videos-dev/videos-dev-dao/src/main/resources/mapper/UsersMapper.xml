@@ -49,4 +49,9 @@
 	<update id="reduceFollowCounts" parameterType="java.lang.String">
 		update users set follow_counts = follow_counts -1 where id = #{userId}
 	</update>
+	
+	<select id="queryUserFollow" resultType="com.dzj.pojo.Users">
+		select * from users where id in (select user_id from users_fans where fan_id = #{fansId})
+	</select>
+	
 </mapper>

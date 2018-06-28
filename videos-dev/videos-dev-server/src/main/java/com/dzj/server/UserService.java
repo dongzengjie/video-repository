@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dzj.dto.PageResult;
 import com.dzj.exception.UserException;
 import com.dzj.pojo.Users;
 
@@ -45,4 +46,13 @@ public interface UserService {
 	 * @return
 	 */
 	public boolean isFollow(String userId ,String fansId);
+	
+	/**
+	 * 分页查询用户的关注数
+	 * @param fansId
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public PageResult queryUserFollowByLimit(String fansId,Integer page,Integer pageSize) throws UserException;
 }

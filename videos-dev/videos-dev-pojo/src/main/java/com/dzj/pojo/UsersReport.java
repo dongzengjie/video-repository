@@ -3,9 +3,12 @@ package com.dzj.pojo;
 import java.util.Date;
 import javax.persistence.*;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Table(name = "users_report")
 public class UsersReport {
     @Id
+    @ApiModelProperty(hidden=true)
     private String id;
 
     /**

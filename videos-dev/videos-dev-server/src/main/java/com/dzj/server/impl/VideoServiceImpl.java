@@ -193,4 +193,21 @@ public class VideoServiceImpl implements VideoService {
 		return true;
 	}
 
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public PageResult getUserLikeVideoByLimit(String userId, Integer page, Integer pageSize) throws VideoException{
+		PageHelper.startPage(page, pageSize);
+		
+		List<VideoVo> videoVosList = videosMapperCustom.queryUserLikeVideo(userId);
+		if(videoVosList==null || videoVosList.size()<=0) {
+			throw new VideoException("视频查询失败~~");
+		}
+		PageInfo<VideoVo> pageInfo = new PageInfo<>(videoVosList);
+		PageResult pageResult =new PageResult();
+		pageResult.setRows(videoVosList);
+		pageResult.setPage(page);
+		pageResult.setTotal(pageInfo.getPages());
+		pageResult.setRecords(pageInfo.getTotal());
+		return pageResult;
+	}
+
 }

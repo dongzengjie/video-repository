@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dzj.exception.UserException;
+import com.dzj.exception.UserReportException;
 import com.dzj.exception.VideoException;
 import com.dzj.utils.JSONResult;
 
@@ -28,6 +29,10 @@ public class GlobalExceptionHandler {
 			VideoException videoException =(VideoException) e;
 			logger.error(videoException.getMessage());
 			return JSONResult.errorException(videoException.getMessage());
+		}else if(e instanceof UserReportException) {
+			UserReportException userReportException =(UserReportException) e;
+			logger.error(userReportException.getMessage());
+			return JSONResult.errorException(userReportException.getMessage());
 		}
 		
 		return null;

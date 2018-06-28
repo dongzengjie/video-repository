@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dzj.dao.UsersFansMapper;
 import com.dzj.dao.UsersMapper;
+import com.dzj.dto.PageResult;
 import com.dzj.enums.UpLoadEnum;
 import com.dzj.exception.UserException;
 import com.dzj.pojo.Users;
@@ -19,6 +20,8 @@ import com.dzj.pojo.UsersFans;
 import com.dzj.pojo.Videos;
 import com.dzj.server.UserService;
 import com.dzj.utils.UploadUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
@@ -96,6 +99,24 @@ public class UserServerImpl implements UserService {
 			return false;
 		}
 		return true;
+	}
+
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public PageResult queryUserFollowByLimit(String fansId, Integer page, Integer pageSize) throws UserException{
+		
+		PageHelper.startPage(page, pageSize);
+		List<Users> usersList = usersMapper.queryUserFollow(fansId);
+		if(usersList==null) {
+			throw new UserException("查询失败");
+		}
+		PageInfo<Users> pageInfo = new PageInfo<>(usersList);
+		PageResult pageResult =new PageResult();
+		pageResult.setRows(usersList);
+		pageResult.setPage(page);
+		pageResult.setTotal(pageInfo.getPages());
+		pageResult.setRecords(pageInfo.getTotal());
+		
+		return pageResult;
 	}
 
 }

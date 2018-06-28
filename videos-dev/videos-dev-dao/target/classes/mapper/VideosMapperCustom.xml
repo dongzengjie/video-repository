@@ -37,15 +37,32 @@
 			and v.video_desc like '%${videos.videoDesc}%'
 		</if>
 
+		<if
+			test="videos != null and videos.userId !=null and videos.userId!=''">
+			and v.user_id = #{videos.userId}
+		</if>
+
 		order by create_time desc
 	</select>
 
 
 	<update id="addLikeCounts" parameterType="java.lang.String">
-		update videos set like_counts=like_counts+1 where id = #{videoId}
+		update videos set
+		like_counts=like_counts+1 where id = #{videoId}
 	</update>
 
 	<update id="reduceLikeCounts" parameterType="java.lang.String">
-		update videos set like_counts=like_counts-1 where id = #{videoId}
+		update videos set
+		like_counts=like_counts-1 where id = #{videoId}
 	</update>
+
+	<select id="queryUserLikeVideo"
+		resultType="com.dzj.pojo.vo.VideoVo">
+		select v.*,u.nickname,u.face_image from videos v left join
+		users u
+		on v.user_id = u.id where v.status = 1 and v.id in (select
+		video_id from users_like_videos where user_id = #{userId} )
+		order by create_time desc
+	</select>
+
 </mapper>
